@@ -62,10 +62,16 @@ const App= () => {
   }
   }
 
+  const searchWord =(input) =>{
+    const searchedWord = words.filter(word =>word.name.toLowerCase().includes(input.toLowerCase()));
+    setWords(searchedWord);
+  }
+
   return (
     <div>
       <h1>Glossary</h1>
       <nav><AddWordForm onAdd={addWord} /></nav>
+      <nav><Search onSearch={searchWord}/></nav>
       <WordList words= {words} onEdit={editWord} onDelete= {(id) =>deleteWord(id)}/>
     </div>
 

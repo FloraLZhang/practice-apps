@@ -35,12 +35,15 @@ app.post('/words', function(req,res) {
 
 app.put('/words/:id',function(req,res){
   const wordData = {
-    id: req.params.id,
+    _id: req.params.id,
     name: req.body.name,
     definition: req.body.definition,
   }
   db.updateWord(wordData)
-  .then(() => res.sendStatus(200))
+  .then((updatedWord) => {
+    res.send(updatedWord);
+    res.status(200);
+  })
   .catch((err) => {
     console.log(err);
     res.sendStatus(500);

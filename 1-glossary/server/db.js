@@ -40,14 +40,14 @@ let getWords = ()=> {
 }
 
 let updateWord = (word) =>{
-  return Word.findByIdAndUpdate(word.id,{
+  return Word.findOneAndUpdate({_id: word._id},{
     name: word.name,
     definition: word.definition
   })
 }
 
 let deleteWord = (id) => {
-  return Word.findByIdAndDelete(id)
+  return Word.findOneAndDelete(id)
 }
 
 // 3. Export the models
