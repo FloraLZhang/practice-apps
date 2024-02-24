@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
@@ -15,17 +16,29 @@ app.use(sessionHandler);
 
 // Logs the time, session_id, method, and url of incoming requests.
 app.use(logger);
+app.use(express.json());
 
 // Serves up all static and generated assets in a specified folder.
-app.use(express.static(path.join(__dirname, /* FILL ME IN */)));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
-/****
- *
- *
- * Other routes here....
- *
- *
- */
+app.post('/responses', (req, res) =>{
+  db.create(req.body)
+    .then(() => res.sendStatus(201))
+    .catch((err)=>{
+      console.log(err);
+      res.sendStatus(500);
+    })
+})
+app.get('/responses', (req, res) => {
+  db.get()
+  .then(responses => {
+    res.send(responses)
+  })
+  .catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  })
+})
 
 app.listen(process.env.PORT);
 console.log(`Listening at http://localhost:${process.env.PORT}`);
