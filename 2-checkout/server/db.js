@@ -36,6 +36,7 @@ let get = () => {
 let create = (response, callback) => {
   const query = `INSERT INTO responses(name, email, password, addressLine1, addressLine2, city, state, zipCode, phoneNumber, creditCardNumber, expiryDate, cvv, billingZipCode)
   VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  //create a variable to store the value
   return db.queryAsync (query,[response.name, response.email, response.password, response.addressLine1, response.addressLine2, response.city, response.state, response.zipCode, response.phoneNumber, response.creditCardNumber, response.expiryDate, response.cvv, response.billingZipCode])
     .then((result) => {
       return result;
