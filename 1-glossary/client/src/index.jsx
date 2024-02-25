@@ -46,13 +46,12 @@ const App= () => {
     const updatedDefinition = prompt('Edit word definition:', word.definition);
     // avoid null input && empty string
     if ( updatedName !== null && updatedDefinition !== null && updatedName.trim() !=='' && updatedDefinition.trim() !== '') {
-    const updatedWord = {
-      _id: word._id,
-      name: updatedName,
-      definition: updatedDefinition,
-    };
-
-    axios.put(`/words/${word._id}`, updatedWord)
+    // const updatedWord = {
+    //   _id: word._id,
+    //   name: updatedName,
+    //   definition: updatedDefinition,
+    // };
+    axios.put(`/words/${word._id}`, {name: updatedName, definition: updatedDefinition})
     .then(() =>{
       fetchWords();
     })
